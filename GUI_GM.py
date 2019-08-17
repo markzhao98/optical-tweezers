@@ -26,8 +26,8 @@ class GUI:
         self.task_X.StartTask()
         self.task_Y.StartTask()
 
-        self.value_X = -0.06  # Equilibrium X voltage value at (520,520)
-        self.value_Y = -0.63  # Equilibrium Y voltage value at (520,520)
+        self.value_X = -0.06  # Equilibrium X voltage value at (490,520)
+        self.value_Y = -0.63  # Equilibrium Y voltage value at (490,520)
 
         self.task_X.WriteAnalogScalarF64(0,10.0,self.value_X,None)
         self.task_Y.WriteAnalogScalarF64(1,10.0,self.value_Y,None)
