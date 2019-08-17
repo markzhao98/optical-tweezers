@@ -3,17 +3,15 @@ import PyDAQmx
 import time
 import numpy as np
 
-f = 2
+f = 200
 omega = 2*np.pi*f
-A = 0.2
-B = -0.05
+A = 4
+B = 0
 
 task = PyDAQmx.Task()
 
 task.CreateAOVoltageChan("/Dev1/ao0","",
                            -10.0,10.0,PyDAQmx.DAQmx_Val_Volts,None)
-
-# a0 for y mirror, a1 for x mirror.
 
 task.StartTask()
 

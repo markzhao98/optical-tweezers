@@ -1,7 +1,7 @@
 # Run Micro-Manager ------------------------------------------------------------
 
-import os
-os.startfile("C:\Program Files\Micro-Manager-1.4\ImageJ.exe")
+#import os
+#os.startfile("C:\Program Files\Micro-Manager-1.4\ImageJ.exe")
 
 import Tkinter as tk
 import PyDAQmx
@@ -113,7 +113,7 @@ class GUI:
                                    height = 2, width = 14, relief = tk.FLAT)
         self.label_freq.grid(row = 4, column = 1)
         
-        self.label_freqrange = tk.Label(self.root, text = 'int (0,1000) >>',
+        self.label_freqrange = tk.Label(self.root, text = '(0,1000) >>',
                                         height = 2, width = 12, relief = tk.FLAT)
         self.label_freqrange.grid(row = 4, column = 0)
         
@@ -228,10 +228,10 @@ class GUI:
     def oscibegin(self):
         
         if (len(self.listbox_whichdir.curselection()) == 1 and 
-            self.isint(self.entry_freq.get()) == True and 
+            self.isfloat(self.entry_freq.get()) == True and 
             self.isint(self.entry_amp.get()) == True):
-            if (int(self.entry_freq.get()) > 0 and 
-                int(self.entry_freq.get()) <= 999 and 
+            if (float(self.entry_freq.get()) > 0 and 
+                float(self.entry_freq.get()) <= 999 and 
                 int(self.entry_amp.get()) > 0 and 
                 int(self.entry_amp.get()) <= 999):
                 
@@ -242,7 +242,7 @@ class GUI:
                 self.btn_osci_begin.config(relief = tk.SUNKEN, state = tk.DISABLED)
                 self.btn_osci_end.config(state = tk.NORMAL)
                 
-                self.freq = int(self.entry_freq.get())
+                self.freq = float(self.entry_freq.get())
                 self.omega = 2*np.pi*self.freq
 
                 self.st = time.clock()
@@ -270,6 +270,15 @@ class GUI:
     # -------------------------------------------------------
     
     def isint(self, stuff):
+      try:
+        int(stuff)
+        return True
+      except ValueError:
+        return False
+    
+    # -------------------------------------------------------
+    
+    def isfloat(self, stuff):
       try:
         float(stuff)
         return True
