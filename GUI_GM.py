@@ -15,21 +15,21 @@ class GUI:
     
     def __init__(self, root, title):
 
-        self.task_X = PyDAQmx.Task()        
+        self.task_X = PyDAQmx.Task()
         self.task_Y = PyDAQmx.Task()
 
         self.task_X.CreateAOVoltageChan("/Dev1/ao0","",
-                           -10.0,10.0,PyDAQmx.DAQmx_Val_Volts,None)        
+                           -10.0,10.0,PyDAQmx.DAQmx_Val_Volts,None)
         self.task_Y.CreateAOVoltageChan("/Dev1/ao1","",
                            -10.0,10.0,PyDAQmx.DAQmx_Val_Volts,None)
 
-        self.task_X.StartTask()        
+        self.task_X.StartTask()
         self.task_Y.StartTask()
 
         self.value_X = -0.06  # Equilibrium X voltage value at (520,520)
         self.value_Y = -0.63  # Equilibrium Y voltage value at (520,520)
 
-        self.task_X.WriteAnalogScalarF64(0,10.0,self.value_X,None)        
+        self.task_X.WriteAnalogScalarF64(0,10.0,self.value_X,None)
         self.task_Y.WriteAnalogScalarF64(1,10.0,self.value_Y,None)
 
         self.root = root
@@ -40,7 +40,7 @@ class GUI:
         self.varA = tk.BooleanVar()
         self.varA.set(True)
         
-        self.label_A = tk.Label(self.root, text = '(??, ??)', font='12', 
+        self.label_A = tk.Label(self.root, text = '(660, 520)', font='12', 
                                 height = 2, width = 16, 
                                 relief = tk.FLAT)
         self.label_A.grid(row = 0, column=1)
@@ -58,7 +58,7 @@ class GUI:
         self.varB = tk.BooleanVar()
         self.varB.set(True)
         
-        self.X = 520
+        self.X = 490
         self.Y = 520
         
         self.label_B = tk.Label(self.root, text = str((self.X, self.Y)), font='12', 
@@ -182,7 +182,7 @@ class GUI:
         if self.ifclick == True:
             self.label_B.config(text = str((self.X, self.Y)))
             
-            self.value_X = - 0.1/42 * (self.X - 520) - 0.06
+            self.value_X = - 0.1/42 * (self.X - 490) - 0.06
             self.value_Y = -0.1/52 * (self.Y - 520) - 0.63
             
             self.task_X.WriteAnalogScalarF64(0,10.0,self.value_X,None)        
