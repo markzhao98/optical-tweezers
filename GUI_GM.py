@@ -26,8 +26,8 @@ class GUI:
         self.task_X.StartTask()
         self.task_Y.StartTask()
 
-        self.value_X = -0.06  # Equilibrium X voltage value at (490,520)
-        self.value_Y = -0.63  # Equilibrium Y voltage value at (490,520)
+        self.value_X = -0.18  # Equilibrium X voltage value at (550,520)
+        self.value_Y = -0.63  # Equilibrium Y voltage value at (550,520)
 
         self.task_X.WriteAnalogScalarF64(0,10.0,self.value_X,None)
         self.task_Y.WriteAnalogScalarF64(1,10.0,self.value_Y,None)
@@ -58,7 +58,7 @@ class GUI:
         self.varB = tk.BooleanVar()
         self.varB.set(True)
         
-        self.X = 490
+        self.X = 550
         self.Y = 520
         
         self.label_B = tk.Label(self.root, text = str((self.X, self.Y)), font='12', 
@@ -182,8 +182,8 @@ class GUI:
         if self.ifclick == True:
             self.label_B.config(text = str((self.X, self.Y)))
             
-            self.value_X = - 0.1/42 * (self.X - 490) - 0.06
-            self.value_Y = -0.1/52 * (self.Y - 520) - 0.63
+            self.value_X = - 0.1/40 * (self.X - 550) - 0.18
+            self.value_Y = -0.05/26.7 * (self.Y - 520) - 0.63
             
             self.task_X.WriteAnalogScalarF64(0,10.0,self.value_X,None)        
             self.task_Y.WriteAnalogScalarF64(1,10.0,self.value_Y,None)
@@ -202,7 +202,7 @@ class GUI:
     
     def X_osci(self):
         
-        self.amp = int(self.entry_amp.get()) * 0.1/42
+        self.amp = int(self.entry_amp.get()) * 0.1/40
         
         self.tt = time.clock() - self.st
         self.txout = self.amp*np.sin(self.omega*self.tt) + self.value_X
@@ -214,7 +214,7 @@ class GUI:
     
     def Y_osci(self):
         
-        self.amp = int(self.entry_amp.get()) * 0.1/52
+        self.amp = int(self.entry_amp.get()) * 0.05/26.7
         
         self.tt = time.clock() - self.st
         self.tyout = self.amp*np.sin(self.omega*self.tt) + self.value_Y
