@@ -1,8 +1,8 @@
 
 import PyDAQmx
 
-value_X = -0.18
-value_Y = -0.63
+value_X = -0.12
+value_Y = -0.62
 
 task_X = PyDAQmx.Task()
 task_Y = PyDAQmx.Task()

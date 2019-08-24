@@ -26,8 +26,8 @@ class GUI:
         self.task_X.StartTask()
         self.task_Y.StartTask()
 
-        self.value_X = -0.18  # Equilibrium X voltage value at (550,520)
-        self.value_Y = -0.63  # Equilibrium Y voltage value at (550,520)
+        self.value_X = -0.12  # Equilibrium X voltage value at (550,520)
+        self.value_Y = -0.62  # Equilibrium Y voltage value at (550,520)
 
         self.task_X.WriteAnalogScalarF64(0,10.0,self.value_X,None)
         self.task_Y.WriteAnalogScalarF64(1,10.0,self.value_Y,None)
@@ -40,7 +40,7 @@ class GUI:
         self.varA = tk.BooleanVar()
         self.varA.set(True)
         
-        self.label_A = tk.Label(self.root, text = '(660, 520)', font='12', 
+        self.label_A = tk.Label(self.root, text = '(700, 520)', font='12', 
                                 height = 2, width = 16, 
                                 relief = tk.FLAT)
         self.label_A.grid(row = 0, column=1)
@@ -182,8 +182,8 @@ class GUI:
         if self.ifclick == True:
             self.label_B.config(text = str((self.X, self.Y)))
             
-            self.value_X = - 0.1/40 * (self.X - 550) - 0.18
-            self.value_Y = -0.05/26.7 * (self.Y - 520) - 0.63
+            self.value_X = - 0.1/40 * (self.X - 550) - 0.12
+            self.value_Y = -0.05/26.7 * (self.Y - 520) - 0.62
             
             self.task_X.WriteAnalogScalarF64(0,10.0,self.value_X,None)        
             self.task_Y.WriteAnalogScalarF64(1,10.0,self.value_Y,None)
