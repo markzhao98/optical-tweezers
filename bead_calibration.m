@@ -2,11 +2,11 @@
 % spectrum density method, with opening a mat file.
 
 % Load the mat file
-load('.mat')
+load('0824_silica_0.72w_centered_8bit.mat')
 
 % Begin calibration
-otc_x = OTCalibPSD(Vx,S,dt,R,eta,T);
-otc_y = OTCalibPSD(Vy,S,dt,R,eta,T);
+otc_x = OTCalibMSD(Vx,S,dt,R,eta,T);
+otc_y = OTCalibMSD(Vy,S,dt,R,eta,T);
 
 otc_x = otc_x.calibrate( ...
     'verbose',true, ...

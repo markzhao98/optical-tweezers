@@ -8,37 +8,27 @@ clc;
 edit('bead_tracking')
 
 % User-defined variables for DVM
-framerate = 100/3; % Number of frames per second
-radius = 4; % Partical radius in [pixel]
-maxdistance = 2; % Maximum distance between objects in consecutive frames (default = 5 pixels)
+framerate = 10.8/10000; % Number of frames per second
+radius = 12; % Partical radius in [pixel]
+maxdistance = 4; % Maximum distance between objects in consecutive frames (default = 5 pixels)
 maxhiatus = 1; % Maximum number of frames that can be skipped (default = 1 frame)
-imin = 50; % Global intensity minimum (watch out for bit number!!)
-imax = 250; % Global intensity maximum (watch out for bit number!!)
+imin = 55; % Global intensity minimum (watch out for bit number!!)
+imax = 255*3; % Global intensity maximum (watch out for bit number!!)
 
 % User-defined variables for calibration
-T = 297; % Temperature in [Kelvin]
+T = 293; % Temperature in [Kelvin]
 eta = 8.9e-4; % Medium viscosity in [kg/(s m)]
-R = 0.5e-6; % Bead radius in [m]
-S = 258e-9; % Conversion factor in [m/pixel]
-dt = 1/framerate; % Sample time in [s]
+R = 1e-6; % Bead radius in [m]
+S = 6.5e-8; % Conversion factor in [m/pixel]
+dt = 10.8/10000; % Sample time in [s]
 
 % Load video file (in tiff stack format)
 video = VideoFileTif(framerate);
 
-% Create DVM
 dvm = DVM2DGauss(video);
 
-% Video properties
-filetype = dvm.filetype();
-framenumber = dvm.framenumber();
-
-% Read video
-images = dvm.read(1,framenumber);
-
-% Play video
-dvm.play()
-
 % Tracking
+framenumber = dvm.framenumber();
 dvm = dvm.tracking('verbose', true, ...
     'displayon', true, ...
     'FramesToTrack', framenumber, ...
@@ -62,4 +52,4 @@ Vy = dvm.Trajectories.Y';
 Vy = Vy - repmat(mean(Vy),size(Vy,1),1);
 
 % Save to mat file
-% save('.mat')
+% save('.mat');
